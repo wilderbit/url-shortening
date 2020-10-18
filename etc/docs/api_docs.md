@@ -16,7 +16,10 @@ This api will create short url for provided actual_url
 
 #### Get API
 - Arguments(String: short_url)
-- Return type(String: Actual URL) 
+- Return type(String: Actual URL)
+
+#### Generate api_key
+- This will be statically generate api that will provided by the service itself, either by login service or provide statically
 
 this api will redirect to the actual url, if present otherwise will return an error page with status 404.  
 
