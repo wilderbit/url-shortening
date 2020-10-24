@@ -34,6 +34,7 @@ async fn main() -> std::io::Result<()> {
     let mut builder = env_logger::Builder::from_env(env);
     builder.target(env_logger::Target::Stdout);
     builder.init();
+    let port = std::env::var("PORT").map(|port| port.parse::<u16>().unwrap()).unwrap();
 
     HttpServer::new(|| {
         App::new()
@@ -41,7 +42,7 @@ async fn main() -> std::io::Result<()> {
             .service(web::resource("/abc").route(web::get().to(create)))
             .service(web::resource("/create").route(web::post().to(routes::create::url)))
     })
-    .bind("127.0.0.1:8080")?
+    .bind(("127.0.0.1", port))?
     .run()
     .await
 }
