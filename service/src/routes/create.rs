@@ -31,6 +31,5 @@ pub async fn url(create_req: Json<CreateRequest>) -> HttpResponse {
         alias: create_req.alias.clone(),
         expiry_time: create_req.expiry_time.clone(),
     };
-
     CreateRequestResponse::success(&t)
 }

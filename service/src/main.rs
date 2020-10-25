@@ -45,6 +45,7 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
             .service(index)
+            .service(web::resource("/api/get").route(web::get().to(routes::get::url)))
             .service(web::resource("/abc").route(web::get().to(create)))
             .service(web::resource("/create").route(web::post().to(routes::create::url)))
     })
