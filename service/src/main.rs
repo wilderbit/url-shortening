@@ -15,10 +15,10 @@ pub struct CreateUrl {
     pub alias: Option<String>,
 }
 
-#[get("/{id}/{name}/")]
-async fn index(web::Path((id, name)): web::Path<(u32, String)>) -> impl Responder {
-    format!("Hello {}! id:{}", name, id)
-}
+// #[get("/{id}/{name}/")]
+// async fn index(web::Path((id, name)): web::Path<(u32, String)>) -> impl Responder {
+//     format!("Hello {}! id:{}", name, id)
+// }
 
 async fn create(web::Query(info): web::Query<CreateUrl>) -> impl Responder {
     format!(
@@ -44,10 +44,10 @@ async fn main() -> std::io::Result<()> {
 
     HttpServer::new(|| {
         App::new()
-            .service(index)
-            .service(web::resource("/api/get").route(web::get().to(routes::get::url)))
-            .service(web::resource("/abc").route(web::get().to(create)))
-            .service(web::resource("/create").route(web::post().to(routes::create::url)))
+            // .service(index)
+            .service(web::resource("/{alias}/{key}/").route(web::get().to(routes::get::url)))
+            // .service(web::resource("/abc").route(web::get().to(create)))
+            //.service(web::resource("/create").route(web::post().to(routes::create::url)))
     })
     .bind(("127.0.0.1", port))?
     .run()
