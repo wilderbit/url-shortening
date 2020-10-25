@@ -57,3 +57,7 @@ function pyfmt() {
 function install_diesel() {
   cargo install diesel_cli --no-default-features --features "postgres"
 }
+
+function diesel_schema() {
+  diesel print-schema only-tables
+}

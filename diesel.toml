@@ -1,0 +1,2 @@
+[print_schema]
+filter = { only_tables = ["url_shortening_url"] }
