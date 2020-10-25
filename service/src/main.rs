@@ -1,8 +1,12 @@
+#[macro_use]
+extern crate serde_json;
 use actix_web::{get, web, App, HttpServer, Responder};
 use serde::Deserialize;
 
-mod base;
-mod routes;
+pub mod base;
+pub mod routes;
+
+use base::ApiResponse;
 
 #[derive(Deserialize)]
 pub struct CreateUrl {
@@ -34,7 +38,9 @@ async fn main() -> std::io::Result<()> {
     let mut builder = env_logger::Builder::from_env(env);
     builder.target(env_logger::Target::Stdout);
     builder.init();
-    let port = std::env::var("PORT").map(|port| port.parse::<u16>().unwrap()).unwrap();
+    let port = std::env::var("PORT")
+        .map(|port| port.parse::<u16>().unwrap())
+        .unwrap();
 
     HttpServer::new(|| {
         App::new()
