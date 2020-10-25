@@ -1,6 +1,6 @@
 """
-This scripts helps to select django models by app name
-and generate diesel.toml file.
+This script helps to select django models by app name
+and will generate diesel.toml file.
 """
 
 import os
@@ -66,7 +66,7 @@ def select_tables():
 
 if __name__ == "__main__":
     rows = select_tables()
-    open("diesel.toml", "w+").write(
+    open(os.environ['PROJDIR'] + "/diesel.toml", "w+").write(
         "[print_schema]\nfilter = { only_tables = [%s] }\n"
         % ", ".join('"%s"' % (t,) for t in rows)
     )
