@@ -1,10 +1,14 @@
 #[macro_use]
 extern crate serde_json;
+#[macro_use]
+extern crate diesel;
+
 use actix_web::{get, web, App, HttpServer, Responder};
 use serde::Deserialize;
 
 pub mod base;
 pub mod routes;
+pub mod models;
 
 use base::ApiResponse;
 

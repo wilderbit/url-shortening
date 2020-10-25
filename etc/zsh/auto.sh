@@ -59,5 +59,12 @@ function install_diesel() {
 }
 
 function diesel_schema() {
-  diesel print-schema only-tables
+  python $PROJDIR/dj/scripts/create_diesel_toml.py
+  if [[ $? != 0 ]]; then
+    echo "failure to update diesel schema"
+    return $?
+  fi
+  (which diesel || install_diesel) >> /dev/null
+  diesel print-schema only-tables > $PROJDIR/service/src/models/schema.rs
+  sed -i '' -e 's/Varchar/Text/g' $PROJDIR/service/src/models/schema.rs
 }
