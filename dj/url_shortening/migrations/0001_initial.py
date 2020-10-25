@@ -7,19 +7,26 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Url',
+            name="Url",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('hash', models.CharField(max_length=15, unique=True)),
-                ('alias', models.CharField(blank=True, max_length=64, null=True)),
-                ('original_url', models.CharField(max_length=4096)),
-                ('expired_on', models.DateTimeField(auto_now_add=True)),
-                ('created_on', models.DateTimeField(auto_now_add=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("hash", models.CharField(max_length=15, unique=True)),
+                ("alias", models.CharField(blank=True, max_length=64, null=True)),
+                ("original_url", models.CharField(max_length=4096)),
+                ("expired_on", models.DateTimeField(auto_now_add=True)),
+                ("created_on", models.DateTimeField(auto_now_add=True)),
             ],
         ),
     ]

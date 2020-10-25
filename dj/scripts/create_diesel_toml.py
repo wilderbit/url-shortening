@@ -19,12 +19,13 @@ exclude_apps = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
-    'django.contrib.sessions',
+    "django.contrib.sessions",
     "django.contrib.messages",
-    'django.contrib.staticfiles',
+    "django.contrib.staticfiles",
 ]
 
 include_apps = ["url_shortening"]
+
 
 def select_tables():
     if not len(include_apps):
@@ -53,15 +54,15 @@ def select_tables():
     include_set_iter = list(map(lambda x: x + "_%", include_set))
     like_query = "(array[%s])" % ",".join("'%s'" % t for t in include_set_iter)
     query = (
-            "select table_name from information_schema.tables where table_schema = 'public' and table_name like any %s"
-            % like_query
+        "select table_name from information_schema.tables where table_schema = 'public' and table_name like any %s"
+        % like_query
     )
     with connection.cursor() as cursor:
         cursor.execute(query)
         rows = cursor.fetchall()
         rows = list(map(lambda x: x[0], rows))
-    print("diesel print-schema config: ", rows)
     return rows
+
 
 if __name__ == "__main__":
     rows = select_tables()
