@@ -65,8 +65,8 @@ def select_tables():
 
 
 if __name__ == "__main__":
-    rows = select_tables()
+    tables = select_tables()
     open(os.environ['PROJDIR'] + "/diesel.toml", "w+").write(
         "[print_schema]\nfilter = { only_tables = [%s] }\n"
-        % ", ".join('"%s"' % (t,) for t in rows)
+        % ", ".join('"%s"' % (t,) for t in tables)
     )
