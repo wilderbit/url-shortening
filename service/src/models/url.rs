@@ -1,6 +1,4 @@
 use super::prelude::*;
-use crate::diesel::ExpressionMethods;
-use diesel::RunQueryDsl;
 
 pub fn create(
     conn: &diesel::pg::PgConnection,

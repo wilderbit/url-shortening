@@ -49,11 +49,12 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
             // .service(index)
+            .service(web::resource("/create").route(web::post().to(routes::create::url)))
             .service(web::resource("/{alias}/{key}/").route(web::get().to(routes::get::url)))
-        // .service(web::resource("/abc").route(web::get().to(create)))
-        //.service(web::resource("/create").route(web::post().to(routes::create::url)))
+        //.service(web::resource("/api/create").route(web::post().to(create)))
     })
     .bind(("127.0.0.1", port))?
+    .workers(4)
     .run()
     .await
 }
