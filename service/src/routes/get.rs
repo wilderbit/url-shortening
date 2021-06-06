@@ -1,5 +1,5 @@
 use actix_web::http::header::LOCATION;
-use actix_web::{web, get};
+use actix_web::{get, web};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize)]
@@ -11,7 +11,6 @@ pub struct GetRequest {
 pub struct GetResponse {
     pub url: String,
 }
-
 
 pub async fn url(web::Path((alias, key)): web::Path<(String, String)>) -> actix_web::HttpResponse {
     println!("{}, {}", alias, key);

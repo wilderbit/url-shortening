@@ -7,8 +7,8 @@ use actix_web::{get, web, App, HttpServer, Responder};
 use serde::Deserialize;
 
 pub mod base;
-pub mod routes;
 pub mod models;
+pub mod routes;
 
 use base::ApiResponse;
 
@@ -50,8 +50,8 @@ async fn main() -> std::io::Result<()> {
         App::new()
             // .service(index)
             .service(web::resource("/{alias}/{key}/").route(web::get().to(routes::get::url)))
-            // .service(web::resource("/abc").route(web::get().to(create)))
-            //.service(web::resource("/create").route(web::post().to(routes::create::url)))
+        // .service(web::resource("/abc").route(web::get().to(create)))
+        //.service(web::resource("/create").route(web::post().to(routes::create::url)))
     })
     .bind(("127.0.0.1", port))?
     .run()
