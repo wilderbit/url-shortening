@@ -12,6 +12,7 @@ pub struct GetRequest {
 pub struct GetResponse {
     pub url: String,
 }
+
 // web::Path((alias, key)): web::Path<(String, String)>
 
 pub async fn url() -> actix_web::HttpResponse {
