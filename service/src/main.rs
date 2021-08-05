@@ -42,6 +42,7 @@ async fn main() -> std::io::Result<()> {
     let mut builder = env_logger::Builder::from_env(env);
     builder.target(env_logger::Target::Stdout);
     builder.init();
+
     let port = std::env::var("PORT")
         .map(|port| port.parse::<u16>().unwrap())
         .unwrap();
@@ -50,7 +51,8 @@ async fn main() -> std::io::Result<()> {
         App::new()
             // .service(index)
             .service(web::resource("/create").route(web::post().to(routes::create::url)))
-            .service(web::resource("/{alias}/{key}/").route(web::get().to(routes::get::url)))
+            // .service(web::resource("/{alias}/{key}/").route(web::get().to(routes::get::url)))
+            .service(web::resource("/").route(web::get().to(routes::get::url)))
         //.service(web::resource("/api/create").route(web::post().to(create)))
     })
     .bind(("127.0.0.1", port))?
@@ -58,3 +60,7 @@ async fn main() -> std::io::Result<()> {
     .run()
     .await
 }
+
+
+//export LDFLAGS="-L/usr/local/opt/openssl/lib"
+// export CPPFLAGS="-I/usr/local/opt/openssl/include"
